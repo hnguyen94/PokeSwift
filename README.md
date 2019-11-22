@@ -1,4 +1,2 @@
-# pokeSwift
-
-A description of this package.
 # PokeSwift
+A Swift wrapper for the PokeAPI [InProgress]
