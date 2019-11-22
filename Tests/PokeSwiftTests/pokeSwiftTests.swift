@@ -3,10 +3,15 @@ import XCTest
 
 final class PokeSwiftTests: XCTestCase {
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(PokeSwift().text, "Hello, World!")
+//      let testPokemon = Pokemon(
+//        id: 1,
+//        name: "Charmander",
+//        height: 1,
+//        order: 1,
+//        weight: 1
+//      )
+      
+      PokeSwift.pokemon(name: "charmander")
     }
 
     static var allTests = [
