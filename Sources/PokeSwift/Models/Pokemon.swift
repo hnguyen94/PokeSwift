@@ -1,7 +1,7 @@
 import Foundation
 
 struct Pokemon: Decodable {
-  let id: String
+  let id: Int
   let name: String
   let height: Int
   let order: Int

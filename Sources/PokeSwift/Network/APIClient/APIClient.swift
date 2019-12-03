@@ -6,10 +6,10 @@ enum APIClientError: Error {
   case failedDecoding
 }
 
-struct APIClient<Model: Decodable> {
+struct APIClient<MODEL: Decodable> {
   func request(
     _ endpoint: Endpoint,
-    completionHandler: @escaping (Result<Model, APIClientError>) -> Void
+    completionHandler: @escaping (Result<MODEL, APIClientError>) -> Void
   ) {
     guard let url = endpoint.url else {
       completionHandler(.failure(.invalidEndpointURL))
@@ -32,7 +32,7 @@ struct APIClient<Model: Decodable> {
       // MARK: - Converting Data
       do {
         let decoder = JSONDecoder()
-        let decodedData = try decoder.decode(Model.self, from: data)
+        let decodedData = try decoder.decode(MODEL.self, from: data)
         completionHandler(.success(decodedData))
       } catch {
         completionHandler(.failure(.failedDecoding))

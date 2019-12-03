@@ -1,17 +1,10 @@
 import Foundation
 
 struct PokeSwift {
-  static func pokemon(name: String) {
+  static func pokemon(name: String, completion: @escaping (Result<Pokemon, APIClientError>) -> Void) {
     let apiClient = APIClient<Pokemon>()
     let endpoint = Endpoint.pokemon(name: name)
 
-   apiClient.request(endpoint) { result in
-      switch result {
-      case .success(let data):
-        print(data)
-      case .failure(let error):
-        print(error)
-      }
-    }
+    apiClient.request(endpoint) { completion($0) }
   }
 }
