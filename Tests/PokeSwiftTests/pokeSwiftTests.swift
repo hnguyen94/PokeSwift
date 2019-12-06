@@ -42,8 +42,14 @@ final class PokeSwiftTests: XCTestCase {
     PokeSwift.pokemon(name: "ditto") { result in
       switch result {
       case .success(let model):
+        XCTAssertEqual(model.abilities.count, 2)
         
-
+        XCTAssertEqual(model.abilities.first!.ability.name, "imposter")
+        let url = "https://pokeapi.co/api/v2/ability/150/"
+        XCTAssertEqual(model.abilities.first!.ability.url, url)
+        XCTAssertEqual(model.abilities.first!.isHidden, true)
+        XCTAssertEqual(model.abilities.first!.slot, 3)
+        
         expectation.fulfill()
       case .failure(let error):
         XCTFail("\(error)")

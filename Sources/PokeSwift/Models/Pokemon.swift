@@ -1,6 +1,7 @@
 import Foundation
 
 struct Pokemon: Decodable {
+  let abilities: [AbilityContainer]
   let baseExperience: Int
   let height: Int
   let id: Int
@@ -9,4 +10,19 @@ struct Pokemon: Decodable {
   let name: String
   let order: Int
   let weight: Int
+}
+
+// MARK: Ability
+
+extension Pokemon {
+  struct AbilityContainer: Decodable {
+    let ability: Ability
+    let isHidden: Bool
+    let slot: Int
+    
+    struct Ability: Decodable {
+      let name: String
+      let url: String
+    }
+  }
 }
