@@ -32,6 +32,7 @@ struct APIClient<MODEL: Decodable> {
       // MARK: - Converting Data
       do {
         let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
         let decodedData = try decoder.decode(MODEL.self, from: data)
         completionHandler(.success(decodedData))
       } catch {
