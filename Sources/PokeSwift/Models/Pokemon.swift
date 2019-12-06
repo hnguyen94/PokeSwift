@@ -3,6 +3,7 @@ import Foundation
 struct Pokemon: Decodable {
   let abilities: [AbilityContainer]
   let baseExperience: Int
+  let forms: [Form]
   let height: Int
   let id: Int
   let isDefault: Bool
@@ -24,5 +25,14 @@ extension Pokemon {
       let name: String
       let url: String
     }
+  }
+}
+
+// MARK: Form {
+
+extension Pokemon {
+  struct Form: Decodable {
+    let name: String
+    let url: String
   }
 }

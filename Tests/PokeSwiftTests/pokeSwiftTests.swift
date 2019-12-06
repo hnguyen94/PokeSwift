@@ -60,7 +60,29 @@ final class PokeSwiftTests: XCTestCase {
     wait(for: [expectation], timeout: 1)
   }
   
-  // MARK
+  // MARK: Forms
+  
+  func test_pokemonModel_forms() {
+    let expectation = XCTestExpectation(description: "Loading Abilites pokemon apiTest REST Call")
+    
+    
+    PokeSwift.pokemon(name: "ditto") { result in
+      switch result {
+      case .success(let model):
+        XCTAssertEqual(model.forms.first!.name, "ditto")
+        let url = "https://pokeapi.co/api/v2/pokemon-form/132/"
+        XCTAssertEqual(model.forms.first!.url, url)
+        
+        expectation.fulfill()
+      case .failure(let error):
+        XCTFail("\(error)")
+        expectation.fulfill()
+      }
+    }
+    
+    wait(for: [expectation], timeout: 1)
+  }
+  
   
   static var allTests = [
     ("test_pokemonModel_basic", test_pokemonModel_basic),
