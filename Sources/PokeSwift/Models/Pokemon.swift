@@ -6,6 +6,7 @@ struct Pokemon: Decodable {
   let forms: [Form]
   let gameIndices: [GameIndice]
   let height: Int
+  let heldItems: [HeldItem]
   let id: Int
   let isDefault: Bool
   let locationAreaEncounters: String
@@ -46,6 +47,19 @@ extension Pokemon {
     let version: Version
 
     struct Version: Decodable {
+      let name: String
+      let url: String
+    }
+  }
+}
+
+// MARK: Held Items
+
+extension Pokemon {
+  struct HeldItem: Decodable {
+    let item: Item
+
+    struct Item: Decodable {
       let name: String
       let url: String
     }
