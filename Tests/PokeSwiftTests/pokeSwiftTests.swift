@@ -83,11 +83,10 @@ final class PokeSwiftTests: XCTestCase {
     wait(for: [expectation], timeout: 1)
   }
 
-  // MARK: Held Items
+  // MARK: Game indices
 
   func test_pokemonModel_gameIndices() {
     let expectation = XCTestExpectation(description: "Loading Game Indices pokemon apiTest REST Call")
-
 
     PokeSwift.pokemon(name: "ditto") { result in
       switch result {
@@ -107,9 +106,28 @@ final class PokeSwiftTests: XCTestCase {
     wait(for: [expectation], timeout: 1)
   }
 
-  // MARK:
-  
-  
+  // MARK: Held Items
+
+  func test_pokemonModel_heldItems() {
+    let expectation = XCTestExpectation(description: "Loading Game Indices pokemon apiTest REST Call")
+
+    PokeSwift.pokemon(name: "ditto") { result in
+      switch result {
+      case .success(let model):
+        XCTAssertEqual(model.heldItems.first!.item.name, "metal-powder")
+        let url = "https://pokeapi.co/api/v2/item/234/"
+        XCTAssertEqual(model.heldItems.first!.item.url, url)
+
+        expectation.fulfill()
+      case .failure(let error):
+        XCTFail("\(error)")
+        expectation.fulfill()
+      }
+    }
+
+    wait(for: [expectation], timeout: 1)
+  }
+
   static var allTests = [
     ("test_pokemonModel_basic", test_pokemonModel_basic),
   ]
