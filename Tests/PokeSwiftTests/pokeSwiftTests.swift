@@ -30,7 +30,7 @@ final class PokeSwiftTests: XCTestCase {
       }
     }
     
-    wait(for: [expectation], timeout: 1)
+    wait(for: [expectation], timeout: 3)
   }
   
   // MARK: - Abilities
@@ -82,6 +82,32 @@ final class PokeSwiftTests: XCTestCase {
     
     wait(for: [expectation], timeout: 1)
   }
+
+  // MARK: Held Items
+
+  func test_pokemonModel_gameIndices() {
+    let expectation = XCTestExpectation(description: "Loading Game Indices pokemon apiTest REST Call")
+
+
+    PokeSwift.pokemon(name: "ditto") { result in
+      switch result {
+      case .success(let model):
+        XCTAssertEqual(model.gameIndices.first!.gameIndex, 132)
+        XCTAssertEqual(model.gameIndices.first!.version.name, "white-2")
+        let url = "https://pokeapi.co/api/v2/version/22/"
+        XCTAssertEqual(model.gameIndices.first!.version.url, url)
+
+        expectation.fulfill()
+      case .failure(let error):
+        XCTFail("\(error)")
+        expectation.fulfill()
+      }
+    }
+
+    wait(for: [expectation], timeout: 1)
+  }
+
+  // MARK:
   
   
   static var allTests = [

@@ -4,6 +4,7 @@ struct Pokemon: Decodable {
   let abilities: [AbilityContainer]
   let baseExperience: Int
   let forms: [Form]
+  let gameIndices: [GameIndice]
   let height: Int
   let id: Int
   let isDefault: Bool
@@ -36,3 +37,19 @@ extension Pokemon {
     let url: String
   }
 }
+
+// MARK: Game Indices
+
+extension Pokemon {
+  struct GameIndice: Decodable {
+    let gameIndex: Int
+    let version: Version
+
+    struct Version: Decodable {
+      let name: String
+      let url: String
+    }
+  }
+}
+
+
