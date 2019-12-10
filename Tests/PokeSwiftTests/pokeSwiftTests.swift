@@ -118,6 +118,12 @@ final class PokeSwiftTests: XCTestCase {
         let url = "https://pokeapi.co/api/v2/item/234/"
         XCTAssertEqual(model.heldItems.first!.item.url, url)
 
+
+        XCTAssertEqual(model.heldItems.first!.versionDetails.first!.rarity, 5)
+        XCTAssertEqual(model.heldItems.first!.versionDetails.first!.version.name, "ultra-sun")
+        let versionURL = "https://pokeapi.co/api/v2/version/29/"
+        XCTAssertEqual(model.heldItems.first!.versionDetails.first!.version.url , versionURL)
+
         expectation.fulfill()
       case .failure(let error):
         XCTFail("\(error)")

@@ -58,10 +58,21 @@ extension Pokemon {
 extension Pokemon {
   struct HeldItem: Decodable {
     let item: Item
+    let versionDetails: [VersionDetail]
 
     struct Item: Decodable {
       let name: String
       let url: String
+    }
+
+    struct VersionDetail: Decodable {
+      let rarity: Int
+      let version: Version
+
+      struct Version: Decodable {
+        let name: String
+        let url: String
+      }
     }
   }
 }
