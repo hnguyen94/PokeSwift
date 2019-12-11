@@ -2,10 +2,10 @@ import Foundation
 
 extension Endpoint {
   static func pokemon(name: String) -> Endpoint {
-    Endpoint(path: "pokemon/\(name)")
+    Endpoint(pathComponent: .pokemon, parameter: name)
   }
   
   static func pokemon(id: Int) -> Endpoint {
-    Endpoint(path: "pokemon/\(id)")
+    Endpoint(pathComponent: .pokemon, parameter: String(id))
   }
 }
