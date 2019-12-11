@@ -134,6 +134,34 @@ final class PokeSwiftTests: XCTestCase {
     wait(for: [expectation], timeout: 1)
   }
 
+  // MARK: Moves
+
+  func test_pokemonModel_moves() {
+    let expectation = XCTestExpectation(description: "Loading Game Indices pokemon apiTest REST Call")
+
+    PokeSwift.pokemon(name: "ditto") { result in
+      switch result {
+      case .success(let model):
+        let sut = model.moves
+        XCTAssertEqual(sut.first!.move.name, "transform")
+        let url = "https://pokeapi.co/api/v2/move/144/"
+        XCTAssertEqual(model.moves.first!.move.url, url)
+
+        XCTAssertEqual(sut.first!.versionGroupDetails.first!.levelLearnedAt, 1)
+        XCTAssertEqual(sut.first!.versionGroupDetails.first!.moveLearnMethod.name, "level-up")
+        let moveURL = "https://pokeapi.co/api/v2/move-learn-method/1/"
+        XCTAssertEqual(sut.first!.versionGroupDetails.first!.moveLearnMethod.url, moveURL)
+
+        expectation.fulfill()
+      case .failure(let error):
+        XCTFail("\(error)")
+        expectation.fulfill()
+      }
+    }
+
+    wait(for: [expectation], timeout: 1)
+  }
+
   static var allTests = [
     ("test_pokemonModel_basic", test_pokemonModel_basic),
   ]

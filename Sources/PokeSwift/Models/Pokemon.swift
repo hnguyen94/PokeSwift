@@ -10,6 +10,7 @@ struct Pokemon: Decodable {
   let id: Int
   let isDefault: Bool
   let locationAreaEncounters: String
+  let moves: [MoveContainer]
   let name: String
   let order: Int
   let weight: Int
@@ -77,4 +78,25 @@ extension Pokemon {
   }
 }
 
+extension Pokemon {
+  struct MoveContainer: Decodable {
+    let move: Move
+    let versionGroupDetails: [VersionGroupDetail]
+
+    struct Move: Decodable {
+      let name: String
+      let url: String
+    }
+
+    struct VersionGroupDetail: Decodable {
+      let levelLearnedAt: Int
+      let moveLearnMethod: MoveLearnMethod
+
+      struct MoveLearnMethod: Decodable {
+        let name: String
+        let url: String
+      }
+    }
+  }
+}
 
